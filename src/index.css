@@ -2,41 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Professional Logistics Design System - PPI Truck & Logistics */
 
 @layer base {
   :root {
+    /* Primary Brand Colors - Deep Navy & Professional Blues */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 210 30% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 30% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 30% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Corporate Navy Primary */
+    --primary: 210 100% 12%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 210 80% 25%;
+    
+    /* Professional Gray Secondary */
+    --secondary: 210 15% 96%;
+    --secondary-foreground: 210 30% 8%;
+    --secondary-dark: 210 25% 88%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Subtle Background Grays */
+    --muted: 210 15% 97%;
+    --muted-foreground: 210 20% 50%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Bright Blue for CTAs */
+    --accent: 212 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 212 100% 85%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Trust Orange Accent */
+    --trust: 25 100% 55%;
+    --trust-foreground: 0 0% 100%;
+    --trust-light: 25 100% 90%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 90%;
+    --input: 210 20% 95%;
+    --ring: 212 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 12%), hsl(210 80% 25%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 8%) 0%, hsl(210 80% 15%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(212 100% 50%), hsl(212 100% 65%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 15% 98%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(210 30% 8% / 0.08);
+    --shadow-medium: 0 8px 30px -4px hsl(210 30% 8% / 0.12);
+    --shadow-strong: 0 20px 60px -12px hsl(210 30% 8% / 0.25);
+    --shadow-accent: 0 8px 30px -4px hsl(212 100% 50% / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +127,63 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground scroll-smooth;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-accent hover:shadow-[var(--shadow-accent)] text-accent-foreground px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-accent/90;
+  }
+  
+  .btn-hero-outline {
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105;
+  }
+  
+  /* Section Headers */
+  .section-header {
+    @apply text-4xl md:text-5xl font-bold text-primary mb-6 tracking-tight;
+  }
+  
+  .section-subheader {
+    @apply text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed;
+  }
+  
+  /* Cards */
+  .service-card {
+    @apply bg-card p-8 rounded-2xl shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] transition-all duration-300 hover:-translate-y-2 border border-border;
+  }
+  
+  .testimonial-card {
+    @apply bg-gradient-to-br from-secondary to-secondary-dark p-8 rounded-2xl shadow-[var(--shadow-medium)] border border-border;
+  }
+  
+  /* Animations */
+  .fade-in {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent;
+  }
+  
+  /* Hero Background */
+  .hero-bg {
+    background: var(--gradient-hero);
+  }
+  
+  /* Form Styles */
+  .form-input {
+    @apply w-full px-4 py-3 rounded-lg border border-border bg-input focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-200;
+  }
+  
+  .form-textarea {
+    @apply w-full px-4 py-3 rounded-lg border border-border bg-input focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-200 resize-none;
   }
 }
