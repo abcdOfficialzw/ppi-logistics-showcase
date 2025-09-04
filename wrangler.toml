@@ -1,0 +1,11 @@
+[env.production]
+name = "ppi-logistics-showcase"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+cwd = "."
+watch_dir = "src"
+
+[[env.production.vars]]
+NODE_VERSION = "22"
